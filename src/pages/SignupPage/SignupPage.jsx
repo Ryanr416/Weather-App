@@ -1,4 +1,7 @@
 import { useState } from "react"
+import { Navigate } from "react-router-dom";
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
+import userService from '../../utils/userService'
 import {
 	Button,
 	Form,
@@ -10,7 +13,7 @@ import {
   } from "semantic-ui-react";
 
 
-export default function SignUpPage() {
+export default function SignUpPage({handleLoginAndSignup}) {
 
     const [state, setState] = useState({
             username: '',
@@ -21,6 +24,12 @@ export default function SignUpPage() {
     })
 
     const [error, setError] = useState(''); 
+    const [selectedFile, setSelectedFile] = useState('')
+
+    function handleFileInput(e){
+        setSelectedFile(e.target.files[0])
+    }
+
 
     // handlechange is being used to detect what key is being typed
     function handleChange(e) {
@@ -41,8 +50,19 @@ export default function SignUpPage() {
     formData.append('password', state.password);
     formData.append('email', state.email);
     formData.append('bio', state.bio);
+     
+
+    try {
+        const signUp = await userService.signup(formData) ;
+        console.log(signup)
+        Navigate('/')
+        handleLoginAndSignup();
+    }catch(err) {
+        console.log(err, 'error in handleLoginAndSignUp');
+        setError('Check your terminal or console for error');
     }
 
+ }
 return (
     <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
     <Grid.Column style={{ maxWidth: 450 }}>
