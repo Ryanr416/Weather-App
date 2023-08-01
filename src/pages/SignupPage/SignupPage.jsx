@@ -13,7 +13,7 @@ import {
   } from "semantic-ui-react";
 
 
-export default function SignUpPage({handleLoginAndSignup}) {
+export default function SignUpPage({handleLoginAndSignUp}) {
 
     const [state, setState] = useState({
             username: '',
@@ -51,13 +51,14 @@ export default function SignUpPage({handleLoginAndSignup}) {
     formData.append('email', state.email);
     formData.append('bio', state.bio);
      
-
+console.log(formData)
     try {
         const signUp = await userService.signup(formData) ;
-        console.log(signup)
+        console.log(signUp)
         Navigate('/')
-        handleLoginAndSignup();
+        handleLoginAndSignUp();
     }catch(err) {
+     
         console.log(err, 'error in handleLoginAndSignUp');
         setError('Check your terminal or console for error');
     }
@@ -114,7 +115,7 @@ return (
               type="file"
               name="photo"
               placeholder="upload profile pic"
-              
+              onChange={handleFileInput}
             />
           </Form.Field>
           <Button type="submit" className="btn">

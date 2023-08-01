@@ -2,9 +2,24 @@ import React from 'react';
 import './LoginPage.css';
 import userService from '../../utils/userService';
 import { Navigate } from 'react-router-dom';
+import {useState} from 'react'
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
+import {
+	Button,
+	Form,
+	Grid,
+	Header,
+	Image,
+	Message,
+	Segment,
+  } from "semantic-ui-react";
+  import { Link, useNavigate} from 'react-router-dom'
 
 
-export default function LoginPage({handleLoginAndSignup}){
+
+
+
+export default function LoginPage({handleLoginAndSignUp}){
    const [state, setState] = useState ({
     email: '',
     password: ''
@@ -24,7 +39,7 @@ export default function LoginPage({handleLoginAndSignup}){
     try{
       await userService.login(state)
       Navigate('/')
-      handleLoginAndSignup
+      handleLoginAndSignUp
     }catch(err){
       console.log(err)
       setError('check terminal or console for error')
@@ -32,14 +47,20 @@ export default function LoginPage({handleLoginAndSignup}){
 
    }
 
+   function handleChange(e){
+    setState({
+      ...state,
+      [e.target.name]: e.target.value
+    })
+   }
 
     return (
-      <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
-      <Grid.Column style={{ maxWidth: 450 }}>
-        <Header as="h2" color="purple" textAlign="center">
-          <Image src="https://i.imgur.com/TM4eA5g.jpg" /> Login
-        </Header>
-        <Form autoComplete="off" onSubmit={handleSubmit}>
+      <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+    <Grid.Column style={{ maxWidth: 450 }}>
+      <Header as='h2' color='teal' textAlign='center'>
+        <Image src='/logo.png' /> Log-in to your account
+      </Header>
+      <Form autoComplete="off" onSubmit={handleSubmit}>
           <Segment stacked>
             <Form.Input
               type="email"
@@ -58,9 +79,9 @@ export default function LoginPage({handleLoginAndSignup}){
               required
             />
 
-            <Button type="submit" className="btn">
-              Login
-            </Button>
+          <Button type="submit" color='teal' fluid size='large'>
+            Login
+          </Button>
           </Segment>
           <Message>
             New to Us? <Link to="/signup">Sign up</Link>
