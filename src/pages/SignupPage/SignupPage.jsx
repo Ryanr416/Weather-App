@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import userService from '../../utils/userService'
 import {
@@ -13,7 +13,7 @@ import {
   } from "semantic-ui-react";
 
 
-export default function SignUpPage({handleLoginAndSignUp}) {
+export default function SignUpPage({handleSignUp}) {
 
     const [state, setState] = useState({
             username: '',
@@ -25,7 +25,7 @@ export default function SignUpPage({handleLoginAndSignUp}) {
 
     const [error, setError] = useState(''); 
     const [selectedFile, setSelectedFile] = useState('')
-
+    const navigate = useNavigate()
     function handleFileInput(e){
         setSelectedFile(e.target.files[0])
     }
@@ -50,16 +50,17 @@ export default function SignUpPage({handleLoginAndSignUp}) {
     formData.append('password', state.password);
     formData.append('email', state.email);
     formData.append('bio', state.bio);
-     
-console.log(formData)
+
+    console.log(formData)
+  
     try {
         const signUp = await userService.signup(formData) ;
         console.log(signUp)
-        Navigate('/')
-        handleLoginAndSignUp();
+        navigate('/')
+        handleSignUp();
     }catch(err) {
      
-        console.log(err, 'error in handleLoginAndSignUp');
+        console.log(err, 'error in handle');
         setError('Check your terminal or console for error');
     }
 

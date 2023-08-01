@@ -19,7 +19,7 @@ import {
 
 
 
-export default function LoginPage({handleLoginAndSignUp}){
+export default function LoginPage({handleLogin}){
    const [state, setState] = useState ({
     email: '',
     password: ''
@@ -39,7 +39,7 @@ export default function LoginPage({handleLoginAndSignUp}){
     try{
       await userService.login(state)
       Navigate('/')
-      handleLoginAndSignUp
+      handleLogin();
     }catch(err){
       console.log(err)
       setError('check terminal or console for error')

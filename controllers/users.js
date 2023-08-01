@@ -8,6 +8,7 @@ module.exports = {
 };
 
 async function signup(req, res) {
+  console.log(req.body)
   const user = new User(req.body);
   try {
     await user.save();
@@ -20,7 +21,7 @@ async function signup(req, res) {
 }
 
 async function login(req, res) {
- 
+ console.log(req.body)
   try {
     const user = await User.findOne({email: req.body.email});
    

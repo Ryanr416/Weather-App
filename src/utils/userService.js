@@ -3,28 +3,23 @@ import tokenService from './tokenService';
 const BASE_URL = '/api/users/';
 
 function signup(user) {
+  console.log(user)
   return fetch(BASE_URL + 'signup', {
     method: 'POST',
-     // headers: new Headers({'Content-Type': 'application/json'}),  // If you are sending a file/photo over
+    // headers: new Headers({'Content-Type': 'application/json'}),  // If you are sending a file/photo over
     // what do datatype do you need to change this too?
     body: user
-    
   })
-
   .then(res => {
-  if (res.ok) {
-    console.log('do something')
-  } else if (res.status === 400 || 403) {
-    console.log('server error', res.status);
-  }
-
-    
+    console.log(res)
+    if (res.ok) return res.json();
+    // Probably a duplicate email
+    throw new Error('Email already taken!');
   })
   // Parameter destructuring!
   .then(({token}) => tokenService.setToken(token));
   // The above could have been written as
   //.then((token) => token.token);
-  
 }
 
 function getUser() {
@@ -42,7 +37,6 @@ function login(creds) {
     body: JSON.stringify(creds)
   })
   .then(res => {
-    console.log(res)
     // Valid login if we have a status of 2xx (res.ok)
     if (res.ok) return res.json();
     throw new Error('Bad Credentials!');

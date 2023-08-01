@@ -14,17 +14,17 @@ function App() {
   const [user, setUser] = useState(userService.getUser());
 
 
-  function handleLoginAndSignUp() {
-    setUser(userService.getUser())
+  function handleSignUp(data) {
+    (userService.signup(data))
   }
 
 
 
   return (
     <Routes>
-      <Route path="/signup" element={<SignupPage handleLoginAndSignUp={handleLoginAndSignUp} />} />
+      <Route path="/signup" element={<SignupPage handleSignUp={handleSignUp} />} />
       <Route path="/" element={<h1>Home Pageeeeeeeeeee</h1>} />
-      <Route path="/login" element={<LoginPage handleLoginAndSignUp={handleLoginAndSignUp}/>} />
+      <Route path="/login" element={<LoginPage/>} />
     </Routes>
   );
 }
