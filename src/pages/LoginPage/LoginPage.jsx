@@ -1,7 +1,7 @@
 import React from 'react';
 import './LoginPage.css';
 import userService from '../../utils/userService';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {useState} from 'react'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import {
@@ -13,7 +13,7 @@ import {
 	Message,
 	Segment,
   } from "semantic-ui-react";
-  import { Link, useNavigate} from 'react-router-dom'
+  import { Link } from 'react-router-dom'
 
 
 
@@ -26,7 +26,7 @@ export default function LoginPage({handleLogin}){
    })
 
 
-
+   const Navigate = useNavigate()
    const [error, setError] = useState('')
 
 
@@ -36,12 +36,12 @@ export default function LoginPage({handleLogin}){
     e.preventDefault();
 
 
-    try{
+    try  {
       await userService.login(state)
       Navigate('/')
       handleLogin();
-    }catch(err){
-      console.log(err)
+    } catch(err){
+       console.log(err)
       setError('check terminal or console for error')
     }
 
