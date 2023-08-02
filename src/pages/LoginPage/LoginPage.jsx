@@ -38,6 +38,7 @@ export default function LoginPage({handleLogin}){
 
     try  {
       await userService.login(state)
+      console.log(state)
       Navigate('/')
       handleLogin();
     } catch(err){
