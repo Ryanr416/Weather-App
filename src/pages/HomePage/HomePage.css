@@ -1,0 +1,16 @@
+.card {
+    flex-direction: row;
+    
+  }
+
+  .ms-3 {
+    background-color: blue;
+    color: white;
+ 
+  }
+
+  .me-3 {
+    background-color: blue;
+    color: white;
+    
+  }
