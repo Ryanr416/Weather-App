@@ -39,7 +39,7 @@ export default function LoginPage({handleLogin}){
     try  {
       await userService.login(state)
       console.log(state)
-      Navigate('/')
+      Navigate('/home')
       handleLogin();
     } catch(err){
        console.log(err)

@@ -28,7 +28,7 @@ function App() {
     const weatherUrl = `http://api.weatherapi.com/v1/current.json?key=be32f322aa1e4669840163843230208&q=${searchTerm}`
 
 
-    async function getWeatherInfo() {
+    async function getWeatherInfo(data) {
 
       try {
         const apiResponse = await fetch(weatherUrl);
@@ -59,20 +59,22 @@ function App() {
   if(!user) {
     return (
       <Routes>
+        <Route path="/*" element={<Navigate to ="/login" />} />
         <Route path="/login" element={<LoginPage handleLogin={handleLogin} />} />
         <Route path="/signup" element={<SignUpPage handleSignUp={handleSignUp} />} />
-        <Route path="/*" element={<Navigate to ="/login" />} />
+        
       </Routes>
     )
   }
 
   return (
     <Routes>
+      <Route path="/" element={<LoginPage handleLogin={handleLogin} />} />
       <Route path="/signup" element={<SignupPage handleSignUp={handleSignUp} />} />
-      <Route path="/" element={<HomePage getWeather={getWeather} />} />
       <Route path="/login" element={<LoginPage handleLogin={handleLogin} />} />
+      <Route path="/home" element={<HomePage getWeather={getWeather}/>} />
     </Routes>
   );
 }
-
+//  
 export default App;
