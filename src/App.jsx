@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 import SignupPage from "./pages/SignupPage/SignupPage"
 import LoginPage from "./pages/LoginPage/LoginPage";
@@ -6,7 +6,8 @@ import { useEffect, useState } from 'react'
 import userService from "./utils/userService";
 import SignUpPage from "./pages/SignupPage/SignupPage";
 import HomePage from "./pages/HomePage/HomePage"
-
+import { propTypes } from "react-bootstrap/esm/Image";
+import { SearchWeatherForm } from "./pages/HomePage/HomePage";
 
 
 
@@ -14,7 +15,6 @@ function App() {
 
   const [user, setUser] = useState(userService.getUser());
   const [weather, setWeather] = useState([])
-  const [geoCoder, setGeoCoder] = ('')
   const [searchTerm, setSearchTerm] = useState('')
 
 
@@ -55,6 +55,13 @@ function App() {
   }
 
 
+  function handleLogout(){
+    userService.logout();
+  
+    setUser(null)
+  }
+
+
 
   if(!user) {
     return (
@@ -73,6 +80,8 @@ function App() {
       <Route path="/signup" element={<SignupPage handleSignUp={handleSignUp} />} />
       <Route path="/login" element={<LoginPage handleLogin={handleLogin} />} />
       <Route path="/home" element={<HomePage getWeather={getWeather}/>} />
+      <Route path="/:username" element={<LoginPage user={user} handleLogout={handleLogout}/> } />
+      
     </Routes>
   );
 }
