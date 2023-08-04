@@ -40,7 +40,7 @@ function App() {
       }
 
     }
-
+    setWeather(data);
     getWeatherInfo();
 
   }, [searchTerm]);
@@ -81,7 +81,7 @@ function App() {
       <Route path="/login" element={<LoginPage handleLogin={handleLogin} />} />
       <Route path="/home" element={<HomePage getWeather={getWeather}/>} />
       <Route path="/:username" element={<LoginPage user={user} handleLogout={handleLogout}/> } />
-      
+      <Route path="/home" element={<HomePage weatherFormState={weatherFormState}/>} />
     </Routes>
   );
 }
