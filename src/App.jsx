@@ -35,12 +35,13 @@ function App() {
 
         const data = await apiResponse.json();
         console.log(data)
+        setWeather(data);
       } catch(err) {
         console.log(err, 'error from api call')
       }
 
     }
-    setWeather(data);
+    
     getWeatherInfo();
 
   }, [searchTerm]);
@@ -79,9 +80,9 @@ function App() {
       <Route path="/" element={<LoginPage handleLogin={handleLogin} />} />
       <Route path="/signup" element={<SignupPage handleSignUp={handleSignUp} />} />
       <Route path="/login" element={<LoginPage handleLogin={handleLogin} />} />
-      <Route path="/home" element={<HomePage getWeather={getWeather}/>} />
+      <Route path="/home" element={<HomePage getWeather={getWeather} weatherFormState={weatherFormState}/>} />
       <Route path="/:username" element={<LoginPage user={user} handleLogout={handleLogout}/> } />
-      <Route path="/home" element={<HomePage weatherFormState={weatherFormState}/>} />
+    
     </Routes>
   );
 }
