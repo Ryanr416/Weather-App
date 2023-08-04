@@ -7,7 +7,7 @@ import userService from "./utils/userService";
 import SignUpPage from "./pages/SignupPage/SignupPage";
 import HomePage from "./pages/HomePage/HomePage"
 import { propTypes } from "react-bootstrap/esm/Image";
-import { SearchWeatherForm } from "./pages/HomePage/HomePage";
+
 
 
 
