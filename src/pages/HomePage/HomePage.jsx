@@ -7,8 +7,21 @@ import PageHeader from "../../components/Header/Header.jsx";
 import userService from "../../utils/userService";
 
 
-export default function HomePage({getWeather, data}){
+export default function HomePage({getWeather, data, weather}){
 
+
+  let feelsLikeC = '';
+  let condition = '';
+  let temp ='';
+  if (weather != undefined || ! weather.error) {
+    console.log('working', weather.current);
+    feelsLikeC = weather.feelslike_c;
+    condition = weather.condtion;
+    temp = weather.temp_c;
+  
+  } else {
+    console.log('error', weather.error)
+  }
 
     const [user, setUser] = useState(userService.getUser());
     const [weatherFormState, setWeatherFormState] = useState('')
@@ -43,9 +56,11 @@ export default function HomePage({getWeather, data}){
                 <Card>
       <Card.Img src="https://picsum.photos/200/300" />
       <Card.Body>
-        <Card.Title>Title Text</Card.Title>
+        <Card.Title>{temp} 
+        {condition} Title Text</Card.Title>
         <Card.Text>
-          {data} hello
+          {feelsLikeC} hello
+          
         </Card.Text>
         <div className="d-flex justify-content-between">
           <Button className="ms-3">Add</Button>

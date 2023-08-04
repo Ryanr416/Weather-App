@@ -80,7 +80,7 @@ function App() {
       <Route path="/" element={<LoginPage handleLogin={handleLogin} />} />
       <Route path="/signup" element={<SignupPage handleSignUp={handleSignUp} />} />
       <Route path="/login" element={<LoginPage handleLogin={handleLogin} />} />
-      <Route path="/home" element={<HomePage getWeather={getWeather} weatherFormState={weatherFormState}/>} />
+      <Route path="/home" element={<HomePage getWeather={getWeather} weather={weather}/>} />
       <Route path="/:username" element={<LoginPage user={user} handleLogout={handleLogout}/> } />
     
     </Routes>
