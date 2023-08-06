@@ -55,7 +55,7 @@ export default function SignUpPage({handleSignUp}) {
   
     try {
         const signUp = await userService.signup(formData) ;
-        console.log(signUp)
+        // console.log(signUp)
         navigate('/')
         handleSignUp();
     }catch(err) {

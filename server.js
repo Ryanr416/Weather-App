@@ -3,7 +3,7 @@ const express = require("express");
 const path = require("path");
 const logger = require("morgan");
 const favicon = require("serve-favicon");
-const userRouter = require("./routes/api/users")
+const cityRouter = require('./routes/api/savedCities')
 require("./config/database");
 
 // Require controllers here
@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(require("./config/auth"));
 // api routes must be before the "catch all" route
 app.use("/api/users", require("./routes/api/users"));
-
+app.use('/api/savedCities', cityRouter);
 // "catch all" route
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));

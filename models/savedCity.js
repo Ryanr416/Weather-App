@@ -7,6 +7,7 @@ const citySchema = new mongoose.Schema({
     country: String,
 
     
+    
 })
 
 module.exports = mongoose.model('Post', citySchema);

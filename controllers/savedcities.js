@@ -5,7 +5,7 @@ const CitiesModel = require ('../models/savedCity')
 module.exports = {
     create,
     delete: deleteCities,
-    new: newCity
+    index
 }
 
 
@@ -17,7 +17,7 @@ try {
 
     req.body.user = req.user._id;
     req.body.userName = req.user.name;
-    req.body.userAvatar = req.user.avatar;
+    
 
 
     citiesFromTheDb.savedcities.push(req.body);
@@ -41,7 +41,9 @@ async function deleteCities(req, res){
     res.redirect('/')
 }
 
-
-function newCity(req, res) {
-    res.render('savedCities/new', {title: 'Add City', errorMsg: ''});
+async function index(req, res) {
+    try {
+        const cities = await Post.find({}).populate("user").exec();
+        res.status(200).json({ cities });
+    } catch (err) {}
 }
