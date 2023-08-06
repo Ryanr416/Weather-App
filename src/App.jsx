@@ -14,8 +14,8 @@ import { propTypes } from "react-bootstrap/esm/Image";
 function App() {
 
   const [user, setUser] = useState(userService.getUser());
-  const [weather, setWeather] = useState([])
-  const [searchTerm, setSearchTerm] = useState('')
+  const [weather, setWeather] = useState(null)
+  const [searchTerm, setSearchTerm] = useState('Toronto')
 
 
 
@@ -28,7 +28,7 @@ function App() {
     const weatherUrl = `http://api.weatherapi.com/v1/current.json?key=be32f322aa1e4669840163843230208&q=${searchTerm}`
 
 
-    async function getWeatherInfo(data) {
+    async function getWeatherInfo() {
 
       try {
         const apiResponse = await fetch(weatherUrl);

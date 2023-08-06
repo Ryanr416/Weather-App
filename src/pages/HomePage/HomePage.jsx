@@ -7,21 +7,21 @@ import PageHeader from "../../components/Header/Header.jsx";
 import userService from "../../utils/userService";
 
 
-export default function HomePage({getWeather, data, weather}){
+export default function HomePage({getWeather, weather}){
 
 
-  let feelsLikeC = '';
-  let condition = '';
-  let temp ='';
-  if (weather != undefined || ! weather.error) {
-    console.log('working', weather.current);
-    feelsLikeC = weather.feelslike_c;
-    condition = weather.condtion;
-    temp = weather.temp_c;
+  // let feelsLikeC = '';
+  // let condition = '';
+  // let temp ='';
+  // if (weather != undefined || ! weather.error) {
+   
+  //   feelsLikeC = weather.feelslike_c;
+  //   condition = weather.condtion;
+  //   temp = weather.current.temp_c;
   
-  } else {
-    console.log('error', weather.error)
-  }
+  // } else {
+  //   console.log('error', weather.error)
+  // }
 
     const [user, setUser] = useState(userService.getUser());
     const [weatherFormState, setWeatherFormState] = useState('')
@@ -34,7 +34,7 @@ export default function HomePage({getWeather, data, weather}){
     function handleSubmit(e){
         e.preventDefault();
         getWeather(weatherFormState)
-        setWeatherFormState()
+        setWeatherFormState('')
     }
 
 
@@ -43,7 +43,7 @@ export default function HomePage({getWeather, data, weather}){
       
         setUser(null)
       }
-    
+    console.log(weather)
 
     return (
         <form onSubmit={handleSubmit}>
@@ -53,13 +53,14 @@ export default function HomePage({getWeather, data, weather}){
           <PageHeader handleLogout={handleLogout} user={user}/>
         </Grid.Column>
       </Grid.Row>
+      {weather?
                 <Card>
       <Card.Img src="https://picsum.photos/200/300" />
       <Card.Body>
-        <Card.Title>{temp} 
-        {condition} Title Text</Card.Title>
+        <Card.Title>Current Temp : {weather.current.temp_c} 
+        </Card.Title>
         <Card.Text>
-          {feelsLikeC} hello
+          Feels Like : {weather.current.feelslike_c} 
           
         </Card.Text>
         <div className="d-flex justify-content-between">
@@ -67,7 +68,7 @@ export default function HomePage({getWeather, data, weather}){
           <Button className="me-3">Remove</Button>
         </div>
       </Card.Body>
-    </Card>
+    </Card>:null}
   </Grid>
         
             <input type="text" placeholder="Search Your Local City For Weather Updates" value={weatherFormState} onChange={handleChange} name="title" />
