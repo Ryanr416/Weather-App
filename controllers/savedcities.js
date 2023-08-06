@@ -2,6 +2,19 @@ const CitiesModel = require ('../models/savedCity')
 
 
 
+
+
+// const { v4: uuidv4 } = require("uuid");
+
+// const S3 = require('aws-sdk/clients/s3');
+
+// const s3 = new S3();
+
+
+// const BUCKET_NAME = process.env.BUCKET_NAME;
+
+
+
 module.exports = {
     create,
     delete: deleteCities,

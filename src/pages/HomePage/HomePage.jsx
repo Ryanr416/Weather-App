@@ -60,7 +60,7 @@ export default function HomePage({ getWeather, weather, handleAddCity }) {
     async function getCities() {
       try {
         const responseFromTheServer = await cityApi.getAll();
-        console.log(responseFromTheServer);
+        console.log(responseFromTheServer, '<- response from the server in city api getALl');
         setCities(responseFromTheServer.cities);
       } catch (err) {
         console.log(err, "err in getCities");
