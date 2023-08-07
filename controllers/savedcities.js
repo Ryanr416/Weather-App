@@ -34,7 +34,7 @@ try {
 
 
     citiesFromTheDb.savedcities.push(req.body);
-
+    console.log(req.body, '- from the req')
     await citiesFromTheDb.save();
 
     console.log(citiesFromTheDb);
