@@ -102,7 +102,7 @@ export default function HomePage({ getWeather, weather, handleAddCity, data}) {
     getCities();
   }, []);
 
-  function cityList() {
+  function CityList(data) {
     return cities.map(city => (
       <li key={city._id}>
         {cities.name}
@@ -151,13 +151,13 @@ export default function HomePage({ getWeather, weather, handleAddCity, data}) {
         ) : null}
 
 <ul>
-          {cityList()}
+          {CityList()}
         </ul>
       </Grid>
 
 
 
-
+      
 
 
 
