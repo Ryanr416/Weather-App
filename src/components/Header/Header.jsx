@@ -16,11 +16,11 @@ export default function PageHeader({ user, handleLogout }) {
         <>
           <Navbar bg="dark" data-bs-theme="dark">
         <Container>
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+          <Navbar.Brand href="#home">Weather</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+            <Nav.Link href="/home">Home</Nav.Link>
+            <Nav.Link href="/logout">LogOut</Nav.Link>
+            <Nav.Link href="#pricing">Saved Cities</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

@@ -17,7 +17,7 @@ const CitiesModel = require ('../models/savedCity')
 
 module.exports = {
     create,
-    delete: deleteCities,
+    delete: deleteCity,
     index
 }
 
@@ -44,18 +44,18 @@ try {
 }
 
 
-async function deleteCities(req, res){
-
-    const deletecity = await CitiesModel.findOneAndDelete(req.params.id)
-    res.redirect('/')
-}
+ async function deleteCity(req, res){
+    console.log(req.params.name)
+    const deleteCity = await CitiesModel.findOneAndDelete({name: req.params.name})
+     res.status(201).json(deleteCity)
+ }
 
 
 
 
 async function index(req, res) {
     try {
-        const cities = await CitiesModel.find({}).populate("user").exec();
+        const cities = await Cities.find({}).populate("user").exec();
         res.status(200).json({ cities });
     } catch (err) {}
 }

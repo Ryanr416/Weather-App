@@ -7,6 +7,7 @@ import userService from "./utils/userService";
 import SignUpPage from "./pages/SignupPage/SignupPage";
 import HomePage from "./pages/HomePage/HomePage"
 import { propTypes } from "react-bootstrap/esm/Image";
+import 'semantic-ui-css/semantic.min.css'
 {
   /* The following line can be included in your src/index.js or App.js file */
 }

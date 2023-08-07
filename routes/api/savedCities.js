@@ -9,7 +9,7 @@ const savedCityCtrl = require('../../controllers/savedcities')
 
 router.post('/', upload.single('photo'), savedCityCtrl.create)
 
-router.delete('/:id', savedCityCtrl.delete)
+router.delete('/:name', savedCityCtrl.delete)
 
 router.get('/', savedCityCtrl.index)
 

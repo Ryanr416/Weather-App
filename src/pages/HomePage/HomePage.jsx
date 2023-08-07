@@ -28,10 +28,18 @@ export default function HomePage({ getWeather, weather, handleAddCity, data}) {
   const [weatherFormState, setWeatherFormState] = useState("");
 
 
-  function handleRemoveCity(cityName) {
-    const updatedCities = cities.filter(city => city.name !== cityName);
-    setCities(updatedCities);
-  };
+  async function handleDeleteCity(data) {
+    console.log(data, '<-- data from deletecity')
+    try {
+      const responseData = await cityApi.deleteCity(data);
+      console.log(responseData, " <- response from server in handleDeleteCity");
+      setCities(prevCities => prevCities.filter(city => city.name !== data));
+    } catch (err) {
+      console.log(err, "err in handleDeleteCity");
+      setError("Error deleting a city! Please try again");
+      
+    }
+  }
 
 
   function handleChange(e) {
@@ -60,7 +68,7 @@ export default function HomePage({ getWeather, weather, handleAddCity, data}) {
         responseData,
         " ,- response from the server in handleAddCity"
       );
-      setCities([responseData.data, ...cities]);
+      setCities([...cities, responseData]);
     } catch (err) {
       console.log(err, "error in handleaddcity homepage");
       setError("Error creating saved city! please try again");
@@ -101,20 +109,19 @@ export default function HomePage({ getWeather, weather, handleAddCity, data}) {
   useEffect(() => {
     getCities();
   }, []);
-
-  function CityList(data) {
-    return cities.map(city => (
-      <li key={city._id}>
-        {cities.name}
+ console.log(cities, '<- cities  console')
+ const allCities = cities?.map(city => (
+    <li key={city._id}>
+        {city.name}
         <Button
           className="ms-3"
-          onClick={() => handleRemoveCity(city.name)}
-        >
-          Remove
-        </Button>
-      </li>
+           onClick={() => handleDeleteCity(city.name)}
+         >
+           Remove
+     </Button>
+       </li>
     ));
-  }
+  
 
 
 
@@ -131,7 +138,8 @@ export default function HomePage({ getWeather, weather, handleAddCity, data}) {
           <Card>
             <Card.Img src={weather.current.condition.icon} />
             <Card.Body>
-              <Card.Title>Current Temp : {weather.current.temp_c} C</Card.Title>
+              <Card.Title>
+                 Current Temp : {weather.current.temp_c} C</Card.Title>
               <Card.Text>
                 Feels Like : {weather.current.feelslike_c} C
                 
@@ -144,14 +152,14 @@ export default function HomePage({ getWeather, weather, handleAddCity, data}) {
                 <Button className="ms-3" onClick={() => handleAddCity(weatherFormState)}>
                   Add
                 </Button>
-                <Button className="me-3" onClick={() => handleRemoveCity={weatherFormState}}>Remove</Button>
+                <Button className="me-3" onClick={() => handleDeleteCity={weatherFormState}}>Remove</Button>
               </div>
             </Card.Body>
           </Card>
         ) : null}
 
 <ul>
-          {CityList()}
+          {allCities}
         </ul>
       </Grid>
 
