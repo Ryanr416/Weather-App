@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema(
     password: String,
     photoUrl: String, // string from aws!
 
-    savedCity :{type: mongoose.Schema.Types.ObjectId, ref: 'SavedCity' }
+    
   },
   {
     timestamps: true,

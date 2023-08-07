@@ -59,7 +59,7 @@ export default function LoginPage({handleLogin}){
       <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
       <Header as='h2' color='teal' textAlign='center'>
-        <Image src='/logo.png' /> Log-in to your account
+        <Image src='https://t4.ftcdn.net/jpg/02/66/38/15/360_F_266381525_alVrbw15u5EjhIpoqqa1eI5ghSf7hpz7.jpg' /> Log-in to your account
       </Header>
       <Form autoComplete="off" onSubmit={handleSubmit}>
           <Segment stacked>
