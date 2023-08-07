@@ -58,6 +58,8 @@ export default function HomePage({ getWeather, weather, handleAddCity, data}) {
 
     setUser(null);
   }
+
+
   console.log(weather);
 
   async function handleAddCity(data) {
@@ -178,7 +180,7 @@ export default function HomePage({ getWeather, weather, handleAddCity, data}) {
 
       <input
         type="text"
-        placeholder="Search Your Local City For Weather Updates"
+        placeholder="Please Enter Your City"
         value={weatherFormState}
         onChange={handleChange}
         name="title"
