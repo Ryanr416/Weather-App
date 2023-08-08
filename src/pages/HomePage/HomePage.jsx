@@ -5,45 +5,28 @@ import "./HomePage.css";
 import { Grid } from "semantic-ui-react";
 import PageHeader from "../../components/Header/Header.jsx";
 import userService from "../../utils/userService";
-
 import * as cityApi from "../../utils/cityApi";
-export default function HomePage({ getWeather, weather, handleAddCity, data}) {
-  // let feelsLikeC = '';
-  // let condition = '';
-  // let temp ='';
-  // if (weather != undefined || ! weather.error) {
 
-  //   feelsLikeC = weather.feelslike_c;
-  //   condition = weather.condtion;
-  //   temp = weather.current.temp_c;
-
-  // } else {
-  //   console.log('error', weather.error)
-  // }
-
-  
+export default function HomePage({ getWeather, weather, handleAddCity, data }) {
   const [error, setError] = useState("");
   const [cities, setCities] = useState([]);
   const [user, setUser] = useState(userService.getUser());
   const [weatherFormState, setWeatherFormState] = useState("");
 
-
+  // function to delete cities currently saved on the DB
   async function handleDeleteCity(data) {
-    console.log(data, '<-- data from deletecity')
     try {
       const responseData = await cityApi.deleteCity(data);
-      console.log(responseData, " <- response from server in handleDeleteCity");
-      setCities(prevCities => prevCities.filter(city => city.name !== data));
+
+      setCities((prevCities) =>
+        prevCities.filter((city) => city.name !== data)
+      );
     } catch (err) {
-      console.log(err, "err in handleDeleteCity");
       setError("Error deleting a city! Please try again");
-      
     }
   }
 
-
   function handleChange(e) {
-    console.log(e.target.value);
     setWeatherFormState(e.target.value);
   }
 
@@ -59,51 +42,25 @@ export default function HomePage({ getWeather, weather, handleAddCity, data}) {
     setUser(null);
   }
 
+  // function to add a city to the DB
 
-  console.log(weather);
-
+  // favourite function as it  cemented the useState . Was using getCities and it would never work, and i kept forgetting you have to set it into state. Learned
+  // alot from this func
   async function handleAddCity(data) {
-    console.log(data, ' <-- data')
     try {
-      const responseData = await cityApi.create({name: data});
-      console.log(
-        responseData,
-        " ,- response from the server in handleAddCity"
-      );
+      const responseData = await cityApi.create({ name: data });
       setCities([...cities, responseData]);
     } catch (err) {
-      console.log(err, "error in handleaddcity homepage");
       setError("Error creating saved city! please try again");
     }
   }
 
-  // async function deleteCity(cityId){
-  //   try {
-  //     const response = await cityApi.deleteCity(cityId);
-  //     console.log(response, '<- response from the server in deleteCity' )
-
-
-  //     getCities();
-
-  //   }catch(err) {
-  //     setError('error removing city')
-  //     console.log(err, 'error from deleting city')
-  //   }
-  // }
-
-
-
+  // function to get all of the cities in the DB and set them into state
   async function getCities() {
     try {
       const responseFromTheServer = await cityApi.getAll();
-      console.log(
-        responseFromTheServer,
-        "<- response from the server in city api getALl"
-      );
       setCities(responseFromTheServer.cities);
-      console.log(cities)
     } catch (err) {
-      console.log(err, "err in getCities");
       setError("Error fetching Cities, check console");
     }
   }
@@ -111,22 +68,16 @@ export default function HomePage({ getWeather, weather, handleAddCity, data}) {
   useEffect(() => {
     getCities();
   }, []);
- console.log(cities, '<- cities  console')
- const allCities = cities?.map(city => (
+
+  // this const maps over all of the cities in the DB, finds the corresponding city you clicked delete on, and removes it from the DB
+  const allCities = cities?.map((city) => (
     <li key={city._id}>
-        {city.name}
-        <Button
-          className="ms-3"
-           onClick={() => handleDeleteCity(city.name)}
-         >
-           Remove
-     </Button>
-       </li>
-    ));
-  
-
-
-
+      {city.name}
+      <Button className="ms-3" onClick={() => handleDeleteCity(city.name)}>
+        Remove
+      </Button>
+    </li>
+  ));
 
   return (
     <form onSubmit={handleSubmit}>
@@ -140,43 +91,26 @@ export default function HomePage({ getWeather, weather, handleAddCity, data}) {
           <Card>
             <Card.Img src={weather.current.condition.icon} />
             <Card.Body>
-              <Card.Title>
-                 Current Temp : {weather.current.temp_c} C</Card.Title>
+              <Card.Title>Current Temp : {weather.current.temp_c} C</Card.Title>
               <Card.Text>
                 Feels Like : {weather.current.feelslike_c} C
-                
               </Card.Text>
-              <Card.Text>
-                {weather.current.condition.text}
-              </Card.Text>
-          
+              <Card.Text>{weather.current.condition.text}</Card.Text>
+
               <div className="d-flex justify-content-between">
-                <Button className="ms-3" onClick={() => handleAddCity(weatherFormState)}>
+                <Button
+                  className="ms-3"
+                  onClick={() => handleAddCity(weatherFormState)}
+                >
                   Add
                 </Button>
-                <Button className="me-3" onClick={() => handleDeleteCity={weatherFormState}}>Remove</Button>
               </div>
             </Card.Body>
           </Card>
         ) : null}
 
-<ul>
-          {allCities}
-        </ul>
+        <ul>{allCities}</ul>
       </Grid>
-
-
-
-      
-
-
-
-
-
-
-
-
-      
 
       <input
         type="text"

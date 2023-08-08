@@ -1,20 +1,5 @@
 const CitiesModel = require ('../models/savedCity')
 
-
-
-
-
-// const { v4: uuidv4 } = require("uuid");
-
-// const S3 = require('aws-sdk/clients/s3');
-
-// const s3 = new S3();
-
-
-// const BUCKET_NAME = process.env.BUCKET_NAME;
-
-
-
 module.exports = {
     create,
     delete: deleteCity,
@@ -23,15 +8,13 @@ module.exports = {
 
 
 async function create(req, res) {
-    console.log (req.body)
+   
 
 try {
     req.body.user = req.user._id;
 
     const citiesFromTheDb = await CitiesModel.create(req.body)
     
-    
-    console.log(citiesFromTheDb, '- from the DB')
     
     return res.status(201).json(citiesFromTheDb)
 

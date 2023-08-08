@@ -2,6 +2,7 @@
 
     const BASE_URL = '/api/savedCities/';
 
+    // the create function for adding a city to the database.
 
     export function create(data){
         return fetch(BASE_URL, {
@@ -18,7 +19,7 @@
     }
 
 
-
+    // this function gathers the list of cities on the database
     export function getAll(){
         return fetch(BASE_URL, {
             method: 'GET',
@@ -36,7 +37,7 @@
 
 
 
-
+// this function deletes the city that was clicked on 
     export function deleteCity(cityName){
         console.log(cityName, ' <- cityName console')
         return fetch(`${BASE_URL}${cityName}`, {
@@ -52,6 +53,3 @@
         throw new Error('Something went wrong in delete City'); 
     })
     }
-
-
-    // create function, import function and call it before the filter, pass the id

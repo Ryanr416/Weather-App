@@ -1,40 +1,42 @@
-
-## Setup 
-
-1. Clone the repo
-2. Rename the folder to your Project, you can use the `mv` command like `mv Mern-Vite-Boilerplate yourprojectname`
-3. Delete the `.git` file, when you are in the root of the file, you can press `ls` and you should see a `.git` file, then go ahead and run `rm -rf .git`
+The Weather App
 
 
-#### Setup your git repo
 
-1. go to github and create your github and create a repo (Without a readme or liscense you can add that later!)
-2.  Then follow the directions on github that says ```…or create a new repository on the command line```
+This is an app to give you detailed and accurate weather information based on the city you type into the search engine.
+You are able to sign up for an account for a more personalized experience. 
+You can also save cities to your account for easy access later.
 
-it should look like this
+You can see the screenshots of the app here :
+https://imgur.com/a/rsMA9CK
 
-```
-git init
-git add .
-git commit -m "first commit"
-git remote add origin git@git.generalassemb.ly:SEI-CC/test.git // this will be whatever your address will be
-git push -u origin main
-```
 
-#### Setup the App
+https://imgur.com/CPCFpYX
 
-```npm install```
 
-*DOTENV*
 
-`touch .env`
+https://imgur.com/vVMA4LY
 
-add your variables
 
-```
-DATABASE_URL=mongodb://localhost:27017/testagramV2
-BUCKET_NAME=catcollectorone
-SECRET=mysecretforjwt
-```
 
-The app is configured, to use those respective key names for the database, jwt secret and aws bucket, of course you'll have your own values
+
+
+The link to the game can be reached at : 
+
+
+
+
+
+The link to my wireframe/trello can be found here :
+https://wireframe.cc/okK8yV 
+
+
+https://wireframe.cc/pOwufy
+
+
+https://trello.com/b/Wkvk2CIP/project-3-react
+
+
+In order to get started, you sign up for an account, type in your city, and your local weather details will appear. You can click Add to save a city, and Remove after youve added a city to remove it.
+
+
+My future plans include A weather radar, as well as a more indepth details page. 
