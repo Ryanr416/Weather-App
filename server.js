@@ -23,11 +23,17 @@ app.use(require("./config/auth"));
 // api routes must be before the "catch all" route
 app.use("/api/users", require("./routes/api/users"));
 app.use('/api/savedCities', cityRouter);
+app.set('view engine', 'ejs');
+// "catch all" route
+
+const manifest = require('./dist/manifest.json');
+
+app.use(express.static(path.join(__dirname, "dist")));
+
 // "catch all" route
 app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.render(path.join(__dirname, 'dist', 'index.ejs'), {manifest});
 });
-
 
 const port = process.env.PORT || 3001;
 
